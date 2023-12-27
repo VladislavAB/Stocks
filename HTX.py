@@ -8,11 +8,6 @@ from urllib.parse import urlencode
 from dotenv import load_dotenv
 import os
 
-load_dotenv()
-
-key = os.getenv("key_binance")
-secret = os.getenv("secret_binance")
-
 
 class HTX:
     def __init__(self, key, secret):
@@ -45,9 +40,9 @@ class HTX:
             asks = []
             method = "depth"
             url = self.base_url + method + "?symbol=" + pair + "&depth=&type=step0"
-            mexc_api_respond = requests.get(url)
-            if mexc_api_respond:
-                load_form_json = json.loads(mexc_api_respond.text)
+            api_respond = requests.get(url)
+            if api_respond:
+                load_form_json = json.loads(api_respond.text)
                 asks = load_form_json['tick']['asks']
             return asks
         return False

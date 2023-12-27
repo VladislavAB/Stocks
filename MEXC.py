@@ -58,9 +58,9 @@ class MEXC:
         commission = {}
         method = "exchangeInfo"
         url = self.base_url + method + "?symbol=" + pair
-        mexc_api_respond = requests.get(url)
-        if mexc_api_respond:
-            load_form_json = json.loads(mexc_api_respond.text)
+        api_respond = requests.get(url)
+        if api_respond:
+            load_form_json = json.loads(api_respond.text)
             maker_commission = load_form_json["symbols"][0]["makerCommission"]
             taker_commission = load_form_json["symbols"][0]["takerCommission"]
             commission = {'maker': maker_commission, 'taker': taker_commission}

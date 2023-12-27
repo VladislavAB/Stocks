@@ -1,5 +1,10 @@
 import requests
 import json
+from dotenv import load_dotenv
+import os
+import datetime
+import hmac
+import base64
 
 
 class OKX:
@@ -56,24 +61,51 @@ class OKX:
         spread = {'ask': asks[0][:2], 'bid': bids[0][:2]}
         return spread
 
+    @staticmethod
+    def get_time():
+        now = datetime.datetime.utcnow()
+        t = now.isoformat("T", "milliseconds")
+        return t + "Z"
 
-#     def get_commission(self, pair: str) -> dict:
-#         commission = {}
-#         method = "exchangeInfo"
-#         url = self.base_url + method + "?symbol=" + pair
-#         mexc_api_respond = requests.get(url)
-#         if mexc_api_respond:
-#             load_form_json = json.loads(mexc_api_respond.text)
-#             maker_commission = load_form_json["symbols"][0]["makerCommission"]
-#             taker_commission = load_form_json["symbols"][0]["takerCommission"]
-#             commission = {'maker': maker_commission, 'taker': taker_commission}
-#         return commission
-#
-#
+    @staticmethod
+    def signature(timestamp, method, request_path, body, secret_key):
+        if str(body) == '{}' or str(body) == 'None':
+            body = ''
+        message = str(timestamp) + str.upper(method) + request_path + str(body)
+        mac = hmac.new(bytes(secret_key, encoding='utf8'), bytes(message, encoding='utf-8'), digestmod='sha256')
+        d = mac.digest()
+        return base64.b64encode(d)
+
+    def get_commission(self, pair: str):
+        url = 'http://www.okex.com/api/v5/account/trade-fee?instType=SPOT&instId=' + pair
+        # Make headers & signature
+        request = 'GET'
+        endpoint = '/api/v5/account/trade-fee'
+        body = '?instType=SPOT&instId=' + pair
+        header = dict()
+        time = self.get_time()
+        header['CONTENT-TYPE'] = 'application/json'
+        header['OK-ACCESS-KEY'] = okex_key
+        header['OK-ACCESS-SIGN'] = self.signature(time, request, endpoint, body, okex_secret)
+        header['OK-ACCESS-TIMESTAMP'] = str(time)
+        header['OK-ACCESS-PASSPHRASE'] = okex_pass
+        response = requests.get(url, headers=header)
+        api_response = response.json()
+        maker_commission = api_response["data"][0]["maker"]
+        taker_commission = api_response["data"][0]["taker"]
+        commission = {'maker': abs(float(maker_commission)), 'taker': abs(float(taker_commission))}
+        return commission
+
+
+load_dotenv()
+okex_key = os.getenv("key_OKX")
+okex_secret = os.getenv("secret_OKX")
+okex_pass = os.getenv("pass_OKX")
+
 stock = OKX()
 print(stock.get_symbols())
 print(stock.check_exist("MDT-USDT"))
 print(stock.get_asks("MDT-USDT"))
 print(stock.get_bids("MDT-USDT"))
 print(stock.get_spread("MDT-USDT"))
-# print(stock.get_commission("MDT-USDT"))
+print(stock.get_commission("MDT-USDT"))

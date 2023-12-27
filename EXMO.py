@@ -59,9 +59,9 @@ class EXMO:
         commission = {}
         method = "pair_settings"
         url = self.base_url + method
-        mexc_api_respond = requests.get(url)
-        if mexc_api_respond:
-            load_form_json = json.loads(mexc_api_respond.text)
+        api_respond = requests.get(url)
+        if api_respond:
+            load_form_json = json.loads(api_respond.text)
             maker_commission = load_form_json[pair]["commission_maker_percent"]
             taker_commission = load_form_json[pair]["commission_taker_percent"]
             commission = {'maker': maker_commission, 'taker': taker_commission}
@@ -75,4 +75,3 @@ print(stock.get_asks("ADA_BTC"))
 print(stock.get_bids("ADA_BTC"))
 print(stock.get_spread("ADA_BTC"))
 print(stock.get_commission("ADA_BTC"))
-

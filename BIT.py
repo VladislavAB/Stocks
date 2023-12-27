@@ -59,9 +59,9 @@ class BIT:
         commission = {}
         method = "instruments"
         url = self.base_url + method
-        mexc_api_respond = requests.get(url)
-        if mexc_api_respond:
-            load_form_json = json.loads(mexc_api_respond.text)
+        api_respond = requests.get(url)
+        if api_respond:
+            load_form_json = json.loads(api_respond.text)
             for i in load_form_json['data']:
                 if i['pair'] == pair:
                     maker_commission = load_form_json['data'][0]["maker_fee_rate"]
