@@ -69,11 +69,18 @@ class BIT:
                     commission = {'maker': maker_commission, 'taker': taker_commission}
         return commission
 
+    def get_spread_w_commission(self, pair):
+        precision = 10
+        spread = self.get_spread(pair)
+        commission = self.get_commission(pair)
+        commission_ask = round(float(spread['ask'][0]) * float(commission['taker']), precision)
+        commission_bid = round(float(spread['bid'][0]) * float(commission['taker']), precision)
+        spread_w_commission = {'ask': round(float(spread['ask'][0]) + commission_ask, precision),
+                               'bid': round(float(spread['bid'][0]) - commission_bid, precision)}
+        return spread_w_commission
+
 
 stock = BIT()
-print(stock.get_symbols())
-print(stock.check_exist("AAVE-USDT"))
-print(stock.get_asks("AAVE-USDT"))
-print(stock.get_bids("AAVE-USDT"))
 print(stock.get_spread("AAVE-USDT"))
 print(stock.get_commission("AAVE-USDT"))
+print(stock.get_spread_w_commission("AAVE-USDT"))

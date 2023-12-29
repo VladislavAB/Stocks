@@ -66,10 +66,34 @@ class MEXC:
             commission = {'maker': maker_commission, 'taker': taker_commission}
         return commission
 
+    def get_precision(self, pair):
+        precision = None
+        method = "exchangeInfo"
+        url = self.base_url + method + "?symbol=" + pair
+        api_respond = requests.get(url)
+        if api_respond:
+            load_form_json = json.loads(api_respond.text)
+            precision = {"quotePrecision": load_form_json["symbols"][0]["quotePrecision"],
+                         "quoteCommissionPrecision": load_form_json["symbols"][0]["quoteCommissionPrecision"]}
+        return precision
+
+    def get_spread_w_commission(self, pair):
+        precision = self.get_precision(pair)
+        spread = self.get_spread(pair)
+        commission = self.get_commission(pair)
+        if commission:
+            commission_ask = round(float(spread['ask'][0]) * float(commission['taker']),
+                                   precision["quoteCommissionPrecision"])
+            commission_bid = round(float(spread['bid'][0]) * float(commission['taker']),
+                                   precision["quoteCommissionPrecision"])
+            spread_w_commission = {'ask': round(float(spread['ask'][0]) + commission_ask, precision["quotePrecision"]),
+                                   'bid': round(float(spread['bid'][0]) - commission_bid, precision["quotePrecision"])}
+            return spread_w_commission
+        return spread
+
 
 stock = MEXC()
-print(stock.get_symbols())
-print(stock.get_asks("WOFO1USDT"))
-print(stock.get_bids("WOFO1USDT"))
-print(stock.get_spread("WOFO1USDT"))
-print(stock.get_commission("WOFO1USDT"))
+print(f'SPREAD: {stock.get_spread("WOFO1USDT")}')
+print(f'COMMISSION: {stock.get_commission("WOFO1USDT")}')
+print(f'PRECISION: {stock.get_precision("WOFO1USDT")}')
+print(f'SPREAD W COMMISSION: {stock.get_spread_w_commission("WOFO1USDT")}')

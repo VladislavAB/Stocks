@@ -96,6 +96,16 @@ class OKX:
         commission = {'maker': abs(float(maker_commission)), 'taker': abs(float(taker_commission))}
         return commission
 
+    def get_spread_w_commission(self, pair):
+        precision = 10
+        spread = self.get_spread(pair)
+        commission = self.get_commission(pair)
+        commission_ask = round(float(spread['ask'][0]) * float(commission['taker']), precision)
+        commission_bid = round(float(spread['bid'][0]) * float(commission['taker']), precision)
+        spread_w_commission = {'ask': round(float(spread['ask'][0]) + commission_ask, precision),
+                               'bid': round(float(spread['bid'][0]) - commission_bid, precision)}
+        return spread_w_commission
+
 
 load_dotenv()
 okex_key = os.getenv("key_OKX")
@@ -103,9 +113,6 @@ okex_secret = os.getenv("secret_OKX")
 okex_pass = os.getenv("pass_OKX")
 
 stock = OKX()
-print(stock.get_symbols())
-print(stock.check_exist("MDT-USDT"))
-print(stock.get_asks("MDT-USDT"))
-print(stock.get_bids("MDT-USDT"))
 print(stock.get_spread("MDT-USDT"))
 print(stock.get_commission("MDT-USDT"))
+print(stock.get_spread_w_commission("MDT-USDT"))

@@ -88,15 +88,36 @@ class HTX:
         commission = {'maker': maker_commission, 'taker': taker_commission}
         return commission
 
+    @staticmethod
+    def get_precision(pair: str) -> dict or None:
+        precision = None
+        url = 'https://api.huobi.pro/v1/settings/common/symbols'
+        api_respond = requests.get(url)
+        if api_respond:
+            load_form_json = json.loads(api_respond.text)
+            for d in load_form_json['data']:
+                if d['symbol'] == pair:
+                    precision = {"price_precision": d['tpp'], "fee_precision": d['fp']}
+                    return precision
+        return precision
+
+    def get_spread_w_commission(self, pair):
+        precision = self.get_precision(pair)
+        spread = self.get_spread(pair)
+        commission = self.get_commission(pair)
+        commission_ask = round(float(spread['ask'][0]) * float(commission['taker']), precision["fee_precision"])
+        commission_bid = round(float(spread['bid'][0]) * float(commission['taker']), precision["fee_precision"])
+        spread_w_commission = {'ask': round(float(spread['ask'][0]) + commission_ask, precision['price_precision']),
+                               'bid': round(float(spread['bid'][0]) - commission_bid, precision['price_precision'])}
+        return spread_w_commission
+
 
 load_dotenv()
 htx_key = os.getenv("key_HTX")
 htx_secret = os.getenv("secret_HTX")
 
 stock = HTX(htx_key, htx_secret)
-print(stock.get_symbols())
-print(stock.check_exist('sylousdt'))
-print(stock.get_asks("sylousdt"))
-print(stock.get_bids("sylousdt"))
 print(stock.get_spread("sylousdt"))
 print(stock.get_commission("sylousdt"))
+print(stock.get_precision("sylousdt"))
+print(stock.get_spread_w_commission("sylousdt"))
