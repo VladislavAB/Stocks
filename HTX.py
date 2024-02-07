@@ -7,6 +7,7 @@ import base64
 from urllib.parse import urlencode
 from dotenv import load_dotenv
 import os
+import pandas as pd
 
 
 class HTX:
@@ -15,6 +16,7 @@ class HTX:
         self.symbols = self.get_symbols()
         self.access_key = key
         self.secret_key = secret
+        self.exchange_info = self.get_exchange_info()
 
     def get_symbols(self) -> list:
         symbols = []
@@ -111,13 +113,25 @@ class HTX:
                                'bid': round(float(spread['bid'][0]) - commission_bid, precision['price_precision'])}
         return spread_w_commission
 
+    def get_exchange_info(self) -> pd.DataFrame:
+        method = 'tickers'
+        url = self.base_url + method
+        mexc_api_respond = requests.get(url)
+        exchange_info = ''
+        if mexc_api_respond:
+            exchange_info = json.loads(mexc_api_respond.text)
+        df = pd.DataFrame(exchange_info)
+        return df
+
 
 load_dotenv()
 htx_key = os.getenv("key_HTX")
 htx_secret = os.getenv("secret_HTX")
 
 stock = HTX(htx_key, htx_secret)
-print(stock.get_spread("sylousdt"))
-print(stock.get_commission("sylousdt"))
-print(stock.get_precision("sylousdt"))
-print(stock.get_spread_w_commission("sylousdt"))
+# print(stock.get_spread("sylousdt"))
+# print(stock.get_commission("sylousdt"))
+# print(stock.get_precision("sylousdt"))
+# print(stock.get_spread_w_commission("sylousdt"))
+print(stock.get_exchange_info())
+stock.exchange_info.to_csv('out/list-HTX.csv', sep='|', encoding='utf-8')

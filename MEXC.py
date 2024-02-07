@@ -1,11 +1,13 @@
 import requests
 import json
+import pandas as pd
 
 
 class MEXC:
     def __init__(self):
         self.base_url = 'https://api.mexc.com/api/v3/'
         self.symbols = self.get_symbols()
+        self.exchange_info = self.get_exchange_info()
 
     def get_symbols(self) -> list:
         symbols = []
@@ -91,9 +93,22 @@ class MEXC:
             return spread_w_commission
         return spread
 
+    def get_exchange_info(self) -> pd.DataFrame:
+        method = 'exchangeInfo'
+        url = self.base_url + method
+        mexc_api_respond = requests.get(url)
+        exchange_info = ''
+        df = None
+        if mexc_api_respond:
+            exchange_info = json.loads(mexc_api_respond.text)
+            df = pd.DataFrame(exchange_info["symbols"])
+        return df
 
 stock = MEXC()
-print(f'SPREAD: {stock.get_spread("WOFO1USDT")}')
-print(f'COMMISSION: {stock.get_commission("WOFO1USDT")}')
-print(f'PRECISION: {stock.get_precision("WOFO1USDT")}')
-print(f'SPREAD W COMMISSION: {stock.get_spread_w_commission("WOFO1USDT")}')
+# print(f'SPREAD: {stock.get_spread("WOFO1USDT")}')
+# print(f'COMMISSION: {stock.get_commission("WOFO1USDT")}')
+# print(f'PRECISION: {stock.get_precision("WOFO1USDT")}')
+# print(f'SPREAD W COMMISSION: {stock.get_spread_w_commission("WOFO1USDT")}')
+stock.exchange_info.to_csv('out/list-MEXC.csv', sep='|', encoding='utf-8')
+
+

@@ -1,11 +1,13 @@
 import requests
 import json
+import pandas as pd
 
 
 class BIT:
     def __init__(self):
         self.base_url = 'https://api.bit.com/spot/v1/'
         self.symbols = self.get_symbols()
+        self.exchange_info = self.get_exchange_info()
 
     def get_symbols(self) -> list:
         symbols = []
@@ -79,8 +81,20 @@ class BIT:
                                'bid': round(float(spread['bid'][0]) - commission_bid, precision)}
         return spread_w_commission
 
+    def get_exchange_info(self) -> pd.DataFrame:
+        method = 'instruments'
+        url = self.base_url + method
+        mexc_api_respond = requests.get(url)
+        exchange_info = ''
+        if mexc_api_respond:
+            exchange_info = json.loads(mexc_api_respond.text)
+        df = pd.DataFrame(exchange_info)
+        return df
+
 
 stock = BIT()
-print(stock.get_spread("AAVE-USDT"))
-print(stock.get_commission("AAVE-USDT"))
-print(stock.get_spread_w_commission("AAVE-USDT"))
+# print(stock.get_spread("AAVE-USDT"))
+# print(stock.get_commission("AAVE-USDT"))
+# print(stock.get_spread_w_commission("AAVE-USDT"))
+print(stock.get_exchange_info())
+stock.exchange_info.to_csv('out/list-BIT.csv', sep='|', encoding='utf-8')

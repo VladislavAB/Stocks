@@ -1,3 +1,4 @@
+import pandas as pd
 import requests
 import json
 
@@ -6,6 +7,7 @@ class EXMO:
     def __init__(self):
         self.base_url = 'https://api.exmo.me/v1.1/'
         self.symbols = self.get_symbols()
+        self.exchange_info = self.get_exchange_info()  # return dataframe
 
     #
     def get_symbols(self) -> list:
@@ -88,8 +90,20 @@ class EXMO:
                                'bid': round(float(spread['bid'][0]) - commission_bid, precision['precision_inst'])}
         return spread_w_commission
 
+    def get_exchange_info(self) -> pd.DataFrame:
+        method = 'pair_settings'
+        url = self.base_url + method
+        mexc_api_respond = requests.get(url)
+        exchange_info = ''
+        if mexc_api_respond:
+            exchange_info = json.loads(mexc_api_respond.text)
+        df = pd.DataFrame(exchange_info)
+        return df
+
 
 stock = EXMO()
-print(stock.get_spread("ADA_BTC"))
-print(stock.get_commission("ADA_BTC"))
-print(stock.get_spread_w_commission("ADA_BTC")["ask"])
+# print(stock.get_spread("ADA_BTC"))
+# print(stock.get_commission("ADA_BTC"))
+# print(stock.get_spread_w_commission("ADA_BTC")["ask"])
+print(stock.exchange_info)
+stock.exchange_info.T.to_csv('out/list-EXMO.csv', sep='|', encoding='utf-8')

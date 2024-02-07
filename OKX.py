@@ -5,12 +5,14 @@ import os
 import datetime
 import hmac
 import base64
+import pandas as pd
 
 
 class OKX:
     def __init__(self):
         self.base_url = 'https://www.okx.com/api/v5/market/'
         self.symbols = self.get_symbols()
+        self.exchange_info = self.get_exchange_info()
 
     def get_symbols(self) -> list:
         symbols = []
@@ -106,6 +108,15 @@ class OKX:
                                'bid': round(float(spread['bid'][0]) - commission_bid, precision)}
         return spread_w_commission
 
+    def get_exchange_info(self) -> pd.DataFrame:
+        url = 'https://www.okx.com/api/v5/public/instruments?instType=SPOT'
+        mexc_api_respond = requests.get(url)
+        exchange_info = ''
+        if mexc_api_respond:
+            exchange_info = json.loads(mexc_api_respond.text)
+        df = pd.DataFrame(exchange_info)
+        return df
+
 
 load_dotenv()
 okex_key = os.getenv("key_OKX")
@@ -113,6 +124,8 @@ okex_secret = os.getenv("secret_OKX")
 okex_pass = os.getenv("pass_OKX")
 
 stock = OKX()
-print(stock.get_spread("MDT-USDT"))
-print(stock.get_commission("MDT-USDT"))
-print(stock.get_spread_w_commission("MDT-USDT"))
+# print(stock.get_spread("MDT-USDT"))
+# print(stock.get_commission("MDT-USDT"))
+# print(stock.get_spread_w_commission("MDT-USDT"))
+print(stock.get_exchange_info())
+stock.exchange_info.to_csv('out/list-OKX.csv', sep='|', encoding='utf-8')
