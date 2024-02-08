@@ -113,9 +113,18 @@ class OKX:
         mexc_api_respond = requests.get(url)
         exchange_info = ''
         if mexc_api_respond:
-            exchange_info = json.loads(mexc_api_respond.text)
+            exchange_info = json.loads(mexc_api_respond.text)['data']
         df = pd.DataFrame(exchange_info)
+        df['gen_name'] = df['instId'].apply(lambda x: x.replace('-', ''))
+        df = df.rename(columns={'instId': 'original_name'})
+        cols = df.columns
+        cols = cols.delete(list(cols).index('gen_name'))
+        cols = cols.delete(list(cols).index('original_name'))
+        cols = cols.insert(0, 'original_name')
+        cols = cols.insert(0, 'gen_name')
+        df = df[cols]
         return df
+
 
 
 load_dotenv()
@@ -128,4 +137,4 @@ stock = OKX()
 # print(stock.get_commission("MDT-USDT"))
 # print(stock.get_spread_w_commission("MDT-USDT"))
 print(stock.get_exchange_info())
-stock.exchange_info.to_csv('out/list-OKX.csv', sep='|', encoding='utf-8')
+stock.exchange_info.to_csv('out/list-OKX.csv', sep='|', encoding='utf-8', index=False)

@@ -97,7 +97,17 @@ class EXMO:
         exchange_info = ''
         if mexc_api_respond:
             exchange_info = json.loads(mexc_api_respond.text)
+            for pair in exchange_info.keys():
+                exchange_info[pair]['gen_name'] = pair.replace('_', '')
         df = pd.DataFrame(exchange_info)
+        df = df.T
+        df['original_name'] = df.index
+        cols = df.columns
+        cols = cols.delete(list(cols).index('gen_name'))
+        cols = cols.delete(list(cols).index('original_name'))
+        cols = cols.insert(0, 'original_name')
+        cols = cols.insert(0, 'gen_name')
+        df = df[cols]
         return df
 
 
@@ -106,4 +116,4 @@ stock = EXMO()
 # print(stock.get_commission("ADA_BTC"))
 # print(stock.get_spread_w_commission("ADA_BTC")["ask"])
 print(stock.exchange_info)
-stock.exchange_info.T.to_csv('out/list-EXMO.csv', sep='|', encoding='utf-8')
+stock.exchange_info.to_csv('out/list-EXMO.csv', sep='|', encoding='utf-8', index=False)

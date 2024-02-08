@@ -100,8 +100,14 @@ class MEXC:
         exchange_info = ''
         df = None
         if mexc_api_respond:
-            exchange_info = json.loads(mexc_api_respond.text)
-            df = pd.DataFrame(exchange_info["symbols"])
+            exchange_info = json.loads(mexc_api_respond.text)["symbols"]
+            df = pd.DataFrame(exchange_info)
+            df['gen_name'] = df['symbol']
+            df = df.rename(columns={'symbol': 'original_name'})
+            cols = df.columns
+            cols = cols.delete(list(cols).index('gen_name'))
+            cols = cols.insert(0, 'gen_name')
+            df = df[cols]
         return df
 
 stock = MEXC()
@@ -109,6 +115,7 @@ stock = MEXC()
 # print(f'COMMISSION: {stock.get_commission("WOFO1USDT")}')
 # print(f'PRECISION: {stock.get_precision("WOFO1USDT")}')
 # print(f'SPREAD W COMMISSION: {stock.get_spread_w_commission("WOFO1USDT")}')
-stock.exchange_info.to_csv('out/list-MEXC.csv', sep='|', encoding='utf-8')
+print(stock.get_exchange_info())
+stock.exchange_info.to_csv('out/list-MEXC.csv', sep='|', encoding='utf-8', index=False)
 
 
