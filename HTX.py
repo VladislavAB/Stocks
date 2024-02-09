@@ -121,7 +121,7 @@ class HTX:
         if mexc_api_respond:
             exchange_info = json.loads(mexc_api_respond.text)['data']
         df = pd.DataFrame(exchange_info)
-        df['gen_name'] = df['symbol'].apply(lambda x: x.upper())
+        df['gen_name'] = df['symbol'].str.upper()
         df = df.rename(columns={'symbol': 'original_name'})
         cols = df.columns
         cols = cols.delete(list(cols).index('gen_name'))
