@@ -25,8 +25,7 @@ df_final = df_final.rename(columns={"original_name": 'name_OKX'})
 df_final = df_final.merge(df_OKX[["gen_name", "original_name"]], on='gen_name', how='left')
 df_final = df_final.rename(columns={"original_name": 'name_MEXC'})
 df_final.to_csv('out/Catalog.csv', encoding='utf-8', na_rep='None', sep='|')
-# df_final[df_final["name_BIT"].notna() & df_final["name_EXMO"].notna() ]
-avilible_tokens = df_final[
+available_tokens = df_final[
     df_final["name_BIT"].notna() & df_final["name_EXMO"].notna() & df_final["name_HTX"].notna() & df_final[
         "name_OKX"].notna() & df_final["name_MEXC"].notna()]
-print(avilible_tokens)
+print(available_tokens)

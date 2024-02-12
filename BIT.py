@@ -71,6 +71,30 @@ class BIT:
                     commission = {'maker': maker_commission, 'taker': taker_commission}
         return commission
 
+    def get_bases(self) -> list:
+        bases = None
+        method = "instruments"
+        url = self.base_url + method
+        api_respond = requests.get(url)
+        if api_respond:
+            load_form_json = json.loads(api_respond.text)
+            df = pd.DataFrame(load_form_json['data'])
+            bases = list(set(list(df['quote_currency'])))
+        return bases
+
+    def get_prices(self) -> pd.DataFrame:
+        bases = self.get_bases()
+        base_url = 'https://api.bit.com/spot/v1/market/summary?quote_ccy='
+        prices = []
+        for base in bases:
+            url = base_url + base
+            api_response = requests.get(url)
+            if api_response:
+                load_form_json = json.loads(api_response.text)
+                prices.append(pd.DataFrame(load_form_json['data']))
+        prices = pd.concat(prices)
+        return prices
+
     def get_spread_w_commission(self, pair):
         precision = 10
         spread = self.get_spread(pair)
@@ -99,8 +123,9 @@ class BIT:
 
 
 stock = BIT()
-# print(stock.get_spread("AAVE-USDT"))
-# print(stock.get_commission("AAVE-USDT"))
-# print(stock.get_spread_w_commission("AAVE-USDT"))
-print(stock.get_exchange_info())
-stock.exchange_info.to_csv('out/list-BIT.csv', sep='|', encoding='utf-8', index=False)
+df_info = stock.get_exchange_info()
+df_prices = stock.get_prices()
+df_prices = df_prices.rename(columns={'pair': 'original_name'})
+df_final = df_prices.merge(df_info, on='original_name', how='left')
+df_final = df_final[df_final["best_bid"] != '']
+df_final.to_csv('out/list-BIT.csv', encoding='utf-8', na_rep='None', sep='|')
