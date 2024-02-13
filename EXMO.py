@@ -90,6 +90,28 @@ class EXMO:
                                'bid': round(float(spread['bid'][0]) - commission_bid, precision['precision_inst'])}
         return spread_w_commission
 
+    def get_pairs(self):
+        pairs = None
+        method = "pair_settings"
+        url = self.base_url + method
+        api_respond = requests.get(url)
+        if api_respond:
+            load_form_json = json.loads(api_respond.text)
+            pairs = list(load_form_json.keys())
+        return pairs
+
+    def get_prices(self):
+        prices = []
+        pairs = self.get_pairs()
+        for pair in pairs:
+            print(pair)
+            best_ask = self.get_asks(pair)[0]
+            best_bid = self.get_bids(pair)[0]
+            prices.append({'original_name': pair, 'best_ask': best_ask[0], 'quantity_ask': best_ask[1],
+                           'best_bid': best_bid[0], 'quantity_bid': best_bid[1]})
+        prices = pd.DataFrame(prices)
+        return prices
+
     def get_exchange_info(self) -> pd.DataFrame:
         method = 'pair_settings'
         url = self.base_url + method
@@ -112,8 +134,12 @@ class EXMO:
 
 
 stock = EXMO()
-# print(stock.get_spread("ADA_BTC"))
-# print(stock.get_commission("ADA_BTC"))
-# print(stock.get_spread_w_commission("ADA_BTC")["ask"])
-print(stock.exchange_info)
-stock.exchange_info.to_csv('out/list-EXMO.csv', sep='|', encoding='utf-8', index=False)
+df_info = stock.get_exchange_info()
+df_prices = stock.get_prices()
+df_final = df_prices.merge(df_info, on='original_name', how='left')
+gen = df_final['gen_name']
+df_final = df_final.drop('gen_name', axis=1)
+df_final = df_final.drop('time', axis=1)
+df_final.insert(0, 'gen_name', gen)
+df_final.to_csv('out/list-EXMO.csv', encoding='utf-8', na_rep='None', sep='|', index=False)
+

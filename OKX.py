@@ -125,7 +125,13 @@ class OKX:
         df = df[cols]
         return df
 
-
+    def get_prices(self) -> pd.DataFrame:
+        url = 'https://www.okx.com/api/v5/market/tickers?instType=SPOT'
+        api_response = requests.get(url)
+        if api_response:
+            load_from_json = json.loads(api_response.text)['data']
+            df = pd.DataFrame(load_from_json)
+        return df
 
 load_dotenv()
 okex_key = os.getenv("key_OKX")
@@ -133,8 +139,12 @@ okex_secret = os.getenv("secret_OKX")
 okex_pass = os.getenv("pass_OKX")
 
 stock = OKX()
-# print(stock.get_spread("MDT-USDT"))
-# print(stock.get_commission("MDT-USDT"))
-# print(stock.get_spread_w_commission("MDT-USDT"))
-print(stock.get_exchange_info())
-stock.exchange_info.to_csv('out/list-OKX.csv', sep='|', encoding='utf-8', index=False)
+df_prices = stock.get_prices()
+df_info = stock.get_exchange_info()
+df_prices = df_prices.rename(columns={'instId': 'original_name'})
+df_final = df_prices.merge(df_info, on='original_name', how='left')
+gen = df_final['gen_name']
+df_final = df_final.drop('gen_name', axis=1)
+df_final = df_final.drop('instType_x', axis=1)
+df_final.insert(0, 'gen_name', gen)
+df_final.to_csv('out/list-OKX.csv', encoding='utf-8', na_rep='None', sep='|', index=False)

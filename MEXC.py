@@ -97,7 +97,6 @@ class MEXC:
         method = 'exchangeInfo'
         url = self.base_url + method
         mexc_api_respond = requests.get(url)
-        exchange_info = ''
         df = None
         if mexc_api_respond:
             exchange_info = json.loads(mexc_api_respond.text)["symbols"]
@@ -110,12 +109,23 @@ class MEXC:
             df = df[cols]
         return df
 
-stock = MEXC()
-# print(f'SPREAD: {stock.get_spread("WOFO1USDT")}')
-# print(f'COMMISSION: {stock.get_commission("WOFO1USDT")}')
-# print(f'PRECISION: {stock.get_precision("WOFO1USDT")}')
-# print(f'SPREAD W COMMISSION: {stock.get_spread_w_commission("WOFO1USDT")}')
-print(stock.get_exchange_info())
-stock.exchange_info.to_csv('out/list-MEXC.csv', sep='|', encoding='utf-8', index=False)
+    def get_prices(self) -> pd.DataFrame:
+        df = ''
+        url = 'https://api.mexc.com/api/v3/ticker/bookTicker'
+        api_response = requests.get(url)
+        if api_response:
+            load_from_json = json.loads(api_response.text)
+            df = pd.DataFrame(load_from_json)
+        return df
 
+
+stock = MEXC()
+df_info = stock.get_exchange_info()
+df_prices = stock.get_prices()
+df_prices = df_prices.rename(columns={'symbol': 'original_name'})
+df_final = df_prices.merge(df_info, on='original_name', how='left')
+gen = df_final['gen_name']
+df_final = df_final.drop('gen_name', axis=1)
+df_final.insert(0, 'gen_name', gen)
+df_final.to_csv('out/list-MEXC.csv', encoding='utf-8', na_rep='None', sep='|', index=False)
 

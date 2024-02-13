@@ -128,4 +128,8 @@ df_prices = stock.get_prices()
 df_prices = df_prices.rename(columns={'pair': 'original_name'})
 df_final = df_prices.merge(df_info, on='original_name', how='left')
 df_final = df_final[df_final["best_bid"] != '']
-df_final.to_csv('out/list-BIT.csv', encoding='utf-8', na_rep='None', sep='|')
+gen = df_final['gen_name']
+df_final = df_final.drop('gen_name', axis=1)
+df_final = df_final.drop('time', axis=1)
+df_final.insert(0, 'gen_name', gen)
+df_final.to_csv('out/list-BIT.csv', encoding='utf-8', na_rep='None', sep='|', index=False)
