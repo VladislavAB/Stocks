@@ -2,7 +2,6 @@ import requests
 import json
 import pandas as pd
 
-
 class BIT:
     def __init__(self):
         self.base_url = 'https://api.bit.com/spot/v1/'
