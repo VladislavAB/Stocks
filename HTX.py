@@ -8,6 +8,7 @@ from urllib.parse import urlencode
 from dotenv import load_dotenv
 import os
 import pandas as pd
+from pprint import pprint
 
 
 class HTX:
@@ -129,6 +130,36 @@ class HTX:
         df = df[cols]
         return df
 
+    @staticmethod
+    def get_currencies() -> pd.DataFrame:
+        result = []
+        url = 'https://api.huobi.pro/v2/reference/currencies'
+        api_response = requests.get(url)
+        if api_response:
+            response = json.loads(api_response.text)['data']
+            for coin_info in response:
+                currency = None
+                display_name = None
+                deposit_status = None
+                withdraw_status = None
+                if 'currency' in coin_info.keys():
+                    currency = coin_info['currency']
+                if 'chains' in coin_info.keys():
+                    for coin in coin_info['chains']:
+                        chain = None
+                        if 'chain' in coin.keys():
+                            chain = coin['chain']
+                        if 'displayName' in coin.keys():
+                            display_name = coin['displayName']
+                        if 'depositStatus' in coin.keys():
+                            deposit_status = coin['depositStatus']
+                        if 'withdrawStatus' in coin.keys():
+                            withdraw_status = coin['withdrawStatus']
+                        result.append({'currency': currency, 'chain': chain, 'display_name': display_name,
+                                       'deposit_status': deposit_status, 'withdraw_status': withdraw_status})
+        df_result = pd.DataFrame(result)
+        return df_result
+
 
 load_dotenv()
 htx_key = os.getenv("key_HTX")
@@ -136,4 +167,6 @@ htx_secret = os.getenv("secret_HTX")
 
 stock = HTX(htx_key, htx_secret)
 df_final = stock.get_exchange_info()
-df_final.to_csv('out/list-HTX.csv', sep='|', encoding='utf-8', index=False)
+df_final.to_csv('out/HTX-spread.csv', sep='|', encoding='utf-8', index=False)
+stock.get_currencies().to_csv('out/HTX-currency.csv', sep='|', encoding='utf-8', index=False)
+pprint(stock.get_currencies())

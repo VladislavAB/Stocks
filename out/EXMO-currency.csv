@@ -1,0 +1,49 @@
+currency_name|name|withdraw|deposit|comment|blockchain
+EXM|EXMO Coin|True|True|The minimum deposit amount is 500 EXM. We support only Ethereum (ERC-20) network for EXM deposits, please consider this when transferring funds.|Ethereum
+ADA|ADA|True|True|We support only Cardano network and Byron addresses for ADA deposits, please consider this when transferring funds.|Cardano
+ALGO|ALGO|True|True|We support only Algorand network for ALGO deposits, please consider this when transferring funds.|Algorand
+ATOM|ATOM|True|True|We support only Cosmos network for ATOM deposits, please consider this when transferring funds.|Cosmos
+BCH|BCH|True|False|We support only Bitcoin Cash network for BCH deposits, please consider this when transferring funds.|Cash Bitcoin
+BTC|BTC|True|True|We support only Bitcoin network for BTC deposits, please consider this when transferring funds.|Bitcoin
+CHZ|CHZ|True|True|We support only Ethereum (ERC-20) network for CHZ deposits, please consider this when transferring funds.|Ethereum
+DAI|DAI|True|True|When depositing DAI (Multi-Collateral Dai), please note that we support only the Ethereum (ERC-20) network.|Ethereum
+DOGE|DOGE|True|True|When depositing DOGE, please note that we support only the Dogecoin network. We do not support the Binance Smart Chain (BEP-20) network for DOGE deposits.|Dogecoin
+DOT|DOT|True|True|We support only Polkadot network for DOT deposits, please consider this when transferring funds.|Polkadot
+ECS|ECS|True|False|We support only eCredits network for ECS deposits, please consider this when transferring funds.|eCredits
+EOS|EOS|True|False|We support only EOS network for EOS deposits, please consider this when transferring funds.|EOS
+ETC|ETC|True|True|When depositing ETC, please note that we support only the Ethereum Classic network. We do not support the Binance Smart Chain (BEP-20) network for ETC deposits.|Classic Ethereum
+ETH|ETH|True|True|When depositing ETH, please note that we support only the Ethereum network. We do not support the Binance Smart Chain (BEP-20) network for ETH deposits.|Ethereum
+EURT|EURT (ERC20)|True|True|We support only Ethereum (ERC-20) network for EURT deposits, please consider this when transferring funds.|Ethereum
+FLOKI|FLOKI (BEP20)|True|True|We support only Binance Smart Chain (BEP-20) network for FLOKI deposits, please consider this when transferring funds.|Chain Smart Binance
+GAS|GAS|False|True|We support only Ethereum (ERC-20) network for GAS deposits, please consider this when transferring funds.|Ethereum
+GUSD|GUSD|True|True|We support only Ethereum (ERC-20) network for GUSD deposits, please consider this when transferring funds.|Ethereum
+LINK|LINK|True|True|We support only Ethereum (ERC-20) network for LINK deposits, please consider this when transferring funds.|Ethereum
+LTC|LTC|True|True|When depositing LTC, please note that we support only the Litecoin network. We do not support the Binance Smart Chain (BEP-20) network for LTC deposits.|Litecoin
+MKR|MKR|True|True|We support only Ethereum (ERC-20) network for MKR deposits, please consider this when transferring funds.|Ethereum
+NEAR|NEAR|True|True|We support only NEAR Protocol network for NEAR deposits, please consider this when transferring funds.|Protocol NEAR
+NEO|NEO|False|True|We support only NEO Legacy network for NEO deposits, please consider this when transferring funds.|Legacy NEO
+OMG|OMG|False|True|We support only Ethereum (ERC-20) network for OMG deposits, please consider this when transferring funds.|Ethereum
+ONE|ONE|True|True|We support only Harmony network for ONE deposits, please consider this when transferring funds.|Harmony
+PEPE|PEPE|True|True|We support only Ethereum (ERC-20) network for PEPE deposits, please consider this when transferring funds.|Ethereum
+PLCU|PLCU|False|False|We support only PLCU network for PLCU deposits, please consider this when transferring funds.|PLCU
+PLCUC|PLCUC|False|False|We support only PLCU Classic network for PLCUC deposits, please consider this when transferring funds.|Classic PLCU
+PRQ|PRQ|False|True|We support only Ethereum (ERC-20) network for PRQ deposits, please consider this when transferring funds.|Ethereum
+QTUM|QTUM|True|True|We support only QTUM network for QTUM deposits, please consider this when transferring funds.|QTUM
+SHIB|SHIB|True|True|We support only Ethereum (ERC-20) network for SHIB deposits, please consider this when transferring funds.|Ethereum
+SOL|SOL|True|True|We support only Solana network for SOL deposits, please consider this when transferring funds.|Solana
+SUI|SUI|True|True|We support only Sui network for SUI deposits, please consider this when transferring funds.|Sui
+TON|TON|True|True|We support only TonCoin network for TON deposits, please consider this when transferring funds. Deposits made without an invoice will not be credited to your account.|TonCoin
+TRX|TRX|True|True|We support only TRON network for TRX deposits, please consider this when transferring funds.|TRON
+UNI|UNI|True|True|We support only Ethereum (ERC-20) network for UNI deposits, please consider this when transferring funds.|Ethereum
+USDC|USDC|True|True|When depositing USDC, please note that we support only the Ethereum (ERC-20) network. We do not support Algorand, Solana and Stellar networks for USDC deposits.|Ethereum
+USDT|USDT (Arbitrum)|True|True|If you want to deposit USDT via the Arbitrum One network, please make sure to use the ARB wallet address.|One Arbitrum
+USDT|USDT (ERC20)|False|True|The minimum deposit amount is 10 USDT. If you want to deposit USDT via the Ethereum network, please make sure to use the ERC-20 wallet address.|Ethereum
+USDT|USDT (OMNI)|True|False|Minimum deposit amount is 10 USDT|None
+USDT|USDT (TRC20)|True|True|The minimum deposit amount is 1 USDT. If you want to deposit USDT via the Tron network, please make sure to use the TRC-20 wallet address.|Tron
+VLX|VLX EVM|True|True|We support only Velas network for VLX deposits, please consider this when transferring funds.|Velas
+XAUT|XAUT (ERC20)|True|True|We support only Ethereum (ERC-20) network for XAUT deposits, please consider this when transferring funds.|Ethereum
+XLM|XLM|True|True|We support only Stellar network for XLM deposits, please consider this when transferring funds.|Stellar
+XRP|XRP|True|True|When depositing XRP, please note that we support only the Ripple network. We do not support the Binance Smart Chain (BEP-20) network for XRP deposits. To guarantee your deposit is credited correctly, please make sure to include the destination tag.|Ripple
+XTZ|XTZ|True|True|We support only Tezos network for XTZ deposits, please consider this when transferring funds.|Tezos
+YFI|YFI|True|True|We support only Ethereum (ERC-20) network for YFI deposits, please consider this when transferring funds.|Ethereum
+ZRX|ZRX|True|False|We support only Ethereum (ERC-20) network for ZRX deposits, please consider this when transferring funds.|Ethereum

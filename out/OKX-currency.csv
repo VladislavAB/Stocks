@@ -1,0 +1,384 @@
+currency|chain|name|deposit_enable|withdraw_enable
+USDT|USDT-OKTC|Tether|True|False
+USDT|USDT-ERC20|Tether|True|True
+USDT|USDT-TRC20|Tether|True|True
+USDT|USDT-Polygon|Tether|True|True
+USDT|USDT-Solana|Tether|True|True
+USDT|USDT-Avalanche C-Chain|Tether|True|True
+USDT|USDT-Arbitrum One|Tether|True|True
+USDT|USDT-Optimism|Tether|True|True
+USDC|USDC-OKTC|USD Coin|True|False
+USDC|USDC-ERC20|USD Coin|True|True
+USDC|USDC-TRC20|USD Coin|True|True
+USDC|USDC-Polygon (Bridged)|USD Coin|True|True
+USDC|USDC-Solana|USD Coin|True|True
+USDC|USDC-Avalanche C-Chain|USD Coin|True|True
+USDC|USDC-Optimism (Bridged)|USD Coin|True|True
+USDC|USDC-Arbitrum One|USD Coin|True|True
+USDC|USDC-Optimism|USD Coin|True|True
+USDC|USDC-Polygon|USD Coin|True|True
+BTC|BTC-Bitcoin|Bitcoin|True|True
+BTC|BTC-Lightning|Bitcoin|True|True
+BTC|BTCK-OKTC|Bitcoin|True|False
+ETH|ETH-ERC20|Ethereum|True|True
+ETH|ETHK-OKTC|Ethereum|True|False
+ETH|ETH-Arbitrum One|Ethereum|True|True
+ETH|ETH-Optimism|Ethereum|True|True
+ETH|ETH-Starknet|Ethereum|True|True
+ETH|ETH-zkSync Era|Ethereum|True|True
+ETH|ETH-Base|Ethereum|True|True
+ETH|ETH-Linea|Ethereum|True|True
+OKB|OKB-ERC20|OKB|True|True
+OKB|OKB-OKTC|OKB|True|False
+LTC|LTC-Litecoin|Litecoin|True|True
+LTC|LTCK-OKTC|Litecoin|True|False
+XRP|XRP-Ripple|Ripple|True|True
+XRP|XRPK-OKTC|Ripple|True|False
+BCH|BCH-BitcoinCash|Bitcoin Cash|True|True
+BCH|BCHK-OKTC|Bitcoin Cash|True|False
+BSV|BSV-Bitcoin SV|Bitcoin SV|True|True
+ETC|ETC-Ethereum Classic|Ethereum Classic|True|True
+ETC|ETCK-OKTC|Ethereum Classic|True|False
+1INCH|1INCH-ERC20|1INCH|True|True
+AAVE|AAVE-ERC20|Aave Token|True|True
+ACA|ACA-Acala|Acala|True|True
+ACE|ACE-Endurance Smart Chain|ACE|True|True
+ACH|ACH-ERC20|Alchemy Pay|True|True
+ADA|ADA-Cardano|Cardano|True|True
+AERGO|AERGO-ERC20|Aergo|True|True
+AGIX|AGIX-ERC20|SingularityNET|True|True
+AGLD|AGLD-ERC20|Adventure Gold|True|True
+AIDOGE|AIDOGE-Arbitrum One|ArbDoge AI|True|True
+AKITA|AKITA-ERC20|Akita Inu|True|True
+ALCX|ALCX-ERC20|Alchemix|True|True
+ALGO|ALGO-Algorand|Algorand|True|True
+ALPHA|ALPHA-ERC20|Alpha Finance Lab|True|True
+ANT|ANT-ERC20|Aragon |True|True
+APE|APE-ERC20|ApeCoin|True|True
+API3|API3-ERC20|API3|True|True
+APM|APM-ERC20|APM|True|True
+APT|APT-Aptos|Aptos|True|True
+AR|AR-Arweave|Arweave|True|True
+ARB|ARB-Arbitrum One|Arbitrum|True|True
+ARB|ARB-ERC20|Arbitrum|True|True
+ARG|ARG-Chiliz Legacy Chain|Argentine Football Association Fan Token|True|True
+ARTY|ARTY-BSC|Artyfact|True|True
+AST|AST-ERC20|AirSwap|True|True
+ASTR|ASTR-Astar|Astar|True|True
+ATOM|ATOM-Cosmos|Cosmos|True|True
+AUCTION|AUCTION-ERC20|Bounce|True|True
+AVAX|AVAX-Avalanche X-Chain|AVAX|True|True
+AVAX|AVAX-Avalanche C-Chain|AVAX|True|True
+AVIVE|AVIVE-Arbitrum One|Avive|True|True
+AXS|AXS-ERC20|Axie Infinity|True|True
+AZY|AZY-BSC|Amazy|True|True
+BABYDOGE|BABYDOGE-OKTC|Baby Doge Coin|True|True
+BABYDOGE|BABYDOGE-BSC|Baby Doge Coin|True|True
+BADGER|BADGER-ERC20|Badger DAO|True|True
+BAL|BAL-ERC20|Balancer|True|True
+BAND|BAND-ERC20|Band Protocol|True|True
+BAT|BAT-ERC20|Basic Attention Token|True|True
+BETH|BETH-ERC20|BETH|False|False
+BICO|BICO-ERC20|Biconomy Token|True|True
+BIGTIME|BIGTIME-ERC20|Big Time|True|True
+BLOK|BLOK-Polygon|Bloktopia|True|True
+BLUR|BLUR-ERC20|BLUR|True|True
+BNB|BNB-BSC|BNB|True|True
+BNT|BNT-ERC20|Bancor|True|True
+BOBA|BOBA-ERC20|Boba Network|True|True
+BONE|BONE-ERC20|Bone ShibaSwap|True|True
+BONK|BONK-Solana|Bonk|True|True
+BORA|BORA-Klaytn|BORA|True|True
+BORING|BORING-ERC20|BoringDAO|True|True
+BRWL|BRWL-ERC20|Blockchain Brawlers|True|True
+BTT|BTT-TRC20|BitTorrent|True|True
+BZZ|BZZ-ERC20|Swarm|True|True
+CEEK|CEEK-BSC|CEEK Smart VR|True|True
+CEL|CEL-ERC20|Celsius Network|True|True
+CELO|CELO-CELO|Celo|True|True
+CELO|CELO-CELO-TOKEN|Celo|True|False
+CELR|CELR-ERC20|Celer Network|True|True
+CETUS|CETUS-SUI|Cetus|True|True
+CFG|CFG-ERC20|Centrifuge|True|True
+CFX|CFX-Conflux|Conflux Token|True|True
+CFX|CFX-CFX_EVM|Conflux Token|True|True
+CGL|CGL-Polygon|Crypto Gladiator League|True|True
+CHZ|CHZ-ERC20|Chiliz|True|True
+CHZ|CHZ-Chiliz Chain|Chiliz|True|True
+CITY|CITY-Chiliz Legacy Chain|Manchester City Fan Token|True|True
+CLV|CLV-ERC20|Clover Finance|True|True
+COMP|COMP-ERC20|Compound|True|True
+CONV|CONV-ERC20|Convergence|True|True
+CORE|CORE-CORE|Core|True|True
+CQT|CQT-ERC20|Covalent|True|True
+CRO|CRO-Crypto|Cronos|True|True
+CRV|CRV-ERC20|Curve DAO Token|True|True
+CRV|CRV-Polygon|Curve DAO Token|True|True
+CSPR|CSPR-Casper|CasperLabs|True|True
+CTC|CTC-ERC20|Creditcoin|True|True
+CTXC|CTXC-Cortex|Cortex|True|True
+CVC|CVC-ERC20|Civic|True|True
+CVX|CVX-ERC20|Convex Finance|True|True
+DAI|DAI-ERC20|Dai|True|True
+DAI|DAIK-OKTC|Dai|True|False
+DAI|DAI-Polygon|Dai|True|True
+DAO|DAO-ERC20|DAO Maker|True|True
+DAO|DAO-BSC|DAO Maker|True|True
+DASH|DASH-Digital Cash|Dash|False|True
+DCR|DCR-Decred|Decred|True|True
+DEP|DEP-ERC20|DEAPCOIN|True|True
+DGB|DGB-Digibyte|DigiByte|True|True
+DIA|DIA-ERC20|DIA|True|True
+DMAIL|DMAIL-BSC|Dmail|True|True
+DOGE|DOGE-Dogecoin|Dogecoin|True|True
+DORA|DORA-ERC20|Dora Factory|True|True
+DOSE|DOSE-ERC20|Dosetoken|True|True
+DOT|DOT-Polkadot|Polkadot|True|True
+DOT|DOTK-OKTC|Polkadot|True|False
+DYDX|DYDX-ERC20|dYdX|True|True
+DYDX|DYDX-DYDX|dYdX|True|False
+EGLD|EGLD-Elrond|Elrond|True|True
+ELF|ELF-AELF|aelf|True|True
+ELON|ELON-ERC20|Dogelon Mars|True|True
+EM|EM-Eminer|Eminer|True|True
+ENJ|ENJ-Enjin Relay Chain|ENJIN|True|True
+ENS|ENS-ERC20|Ethereum Name Service|True|True
+EOS|EOS-EOS|EOS|True|True
+ERN|ERN-ERC20|Ethernity Chain|True|True
+ETHW|ETHW-EthereumPoW|EthereumPoW|True|True
+EURT|EURT-ERC20|Euro Tether|True|True
+FET|FET-ERC20|Fetch|True|True
+FIL|FIL-Filecoin|Filecoin|True|True
+FIL|FILK-OKTC|Filecoin|True|False
+FIL|FIL-FEVM|Filecoin|True|False
+FITFI|FITFI-Avalanche C-Chain|Step App|True|True
+FLM|FLM-N3|Flamingo Finance|True|True
+FLOKI|FLOKI-BSC|FLOKI|True|True
+FLOW|FLOW-FLOW|Flow|True|True
+FLR|FLR-Flare|Flare|True|True
+FORTH|FORTH-ERC20|Ampleforth Governance|True|True
+FRONT|FRONT-ERC20|Frontier|True|True
+FTM|FTM-Fantom|Fantom Token|True|True
+FXS|FXS-ERC20|Frax Share|True|True
+GAL|GAL-ERC20|Galxe|True|True
+GALA|GALA-ERC20|Gala|True|True
+GALFT|GALFT-Chiliz Legacy Chain|Galatasaray Fan Token|True|True
+GARI|GARI-Solana|Gari Token|True|True
+GAS|GAS-NEO|Gas|False|True
+GAS|GAS-N3|Gas|True|True
+GEAR|GEAR-ERC20|Gearbox|True|True
+GF|GF-ERC20|GuildFi|True|True
+GFT|GFT-BSC|Gifto|True|True
+GHST|GHST-ERC20|Aavegotchi GHST Token|True|True
+GLM|GLM-ERC20|GLM|True|True
+GLMR|GLMR-Moonbeam|Moonbeam|True|True
+GMT|GMT-Solana|STEPN|True|True
+GMT|GMT-ERC20|STEPN|True|True
+GMT|GMT-Polygon|STEPN|True|True
+GMX|GMX-Arbitrum One|GMX|True|True
+GOAL|GOAL-BSC|TopGoal Token|True|True
+GODS|GODS-ERC20|Gods Unchained|True|True
+GOG|GOG-ERC20|Guild of Guardians|True|True
+GRT|GRT-ERC20|The Graph|True|True
+HBAR|HBAR-Hedera|Hedera|True|True
+HC|HC-HyperCash|HyperCash|True|True
+HNT|HNT-Solana|Helium|False|True
+ICE|ICE-BSC|Ice|True|True
+ICP|ICP-Dfinity|Internet Computer Protocol|True|True
+ICX|ICX-ICON|ICON |True|True
+ID|ID-ERC20|SPACE ID|True|True
+IGU|IGU-BSC|IGU|True|True
+ILV|ILV-ERC20|Illuvium|True|True
+IMX|IMX-ERC20|Immutable X|True|True
+INJ|INJ-INJ|Injective|True|True
+IOST|IOST-IOST|IOST|True|True
+IOTA|IOTA-MIOTA|IOTA|True|True
+IQ|IQ-EOS|Everipedia|True|True
+JOE|JOE-Avalanche C-Chain|Trader Joe|True|True
+JPG|JPG-Cardano|JPG|True|True
+JST|JST-TRC20|JUST|True|True
+JTO|JTO-Solana|Jito|True|True
+JUP|JUP-Solana|Jupiter|True|True
+KAN|KAN-ERC20|BitKan|True|True
+KAR|KAR-KAR|Karura|True|True
+KCAL|KCAL-Step Network|KCAL|True|True
+KDA|KDA-Kadena|Kadena|True|True
+KINE|KINE-ERC20|Kine Governance|True|True
+KISHU|KISHU-ERC20|Kishu Inu|True|True
+KLAY|KLAY-Klaytn|Klaytn|True|True
+KNC|KNC-ERC20|Kyber Network|True|True
+KP3R|KP3R-ERC20|Keep3r|True|True
+KSM|KSM-Kusama|Kusama|True|True
+LAMB|LAMB-ERC20|Lambda|True|True
+LAT|LAT-PlatON|PlatON Network|True|True
+LBR|LBR-ERC20|Lybra Finance|True|True
+LDO|LDO-ERC20|Lido DAO|True|True
+LEASH|LEASH-ERC20|Doge Killer|True|True
+LEO|LEO-ERC20|Bitfinex LEO Token|True|True
+LET|LET-Linkeye|LinkEye|True|True
+LHINU|LHINU-ERC20|Love Hate Inu|True|True
+LING|LING-BSC|Lingose|True|True
+LINK|LINK-ERC20|Chainlink|True|True
+LINK|LINKK-OKTC|Chainlink|True|False
+LITH|LITH-ERC20|Lithium Finance|True|True
+LON|LON-ERC20|LON|True|True
+LOOKS|LOOKS-ERC20|LooksRare|True|True
+LPT|LPT-ERC20|Livepeer|True|True
+LQTY|LQTY-ERC20|Liquity|True|True
+LRC|LRC-ERC20|Loopring|True|True
+LSK|LSK-Lisk|Lisk|True|True
+LUNA|LUNA-Terra|Wrapped Terra|True|True
+LUNC|LUNC-Terra Classic|Terra Luna Classic|True|True
+MAGIC|MAGIC-Arbitrum One|Magic|True|True
+MANA|MANA-ERC20|Decentraland|True|True
+MASK|MASK-ERC20|Mask Network|True|True
+MATIC|MATIC-ERC20|Polygon|True|True
+MATIC|MATIC-Polygon|Polygon|True|True
+MDT|MDT-ERC20|Measurable Data Token|True|True
+MEME|MEME-ERC20|Memecoin|True|True
+MENGO|MENGO-Chiliz Legacy Chain|Flamengo Fan Token|True|True
+METIS|METIS-Metis|MetisDao|True|True
+METIS|METIS-Metis (Token Transfer)|MetisDao|True|False
+MILO|MILO-BSC|Milo Inu|True|True
+MINA|MINA-Mina|Mina Protocol|True|True
+MKR|MKR-ERC20|Maker|True|True
+MLN|MLN-ERC20|Enzyme|True|True
+MOVEZ|MOVEZ-BSC|MOVEZ.me|True|True
+MOVR|MOVR-Moonriver|Moonriver|True|True
+MRST|MRST-Polygon|Mars Token|True|True
+MXC|MXC-Layer 3|MXC|True|True
+MYRIA|MYRIA-ERC20|Myria|True|True
+NEAR|NEAR-NEAR|Near Protocol|True|True
+NEO|NEO-N3|NEO|True|True
+NFT|NFT-TRC20|APENFT|True|True
+NMR|NMR-ERC20|Numeraire|True|True
+NULS|NULS-NULS|NULS|True|True
+NYM|NYM-ERC20|Nym|True|True
+OAS|OAS-OASYS|OASYS|True|True
+OKDOT2|OKDOT2-ERC20|OKDOT2|False|False
+OKT|OKT-OKTC|OKTC Token|True|True
+OM|OM-ERC20|MantraDAO|True|True
+OMG|OMG-ERC20|OmiseGO|True|True
+OMI|OMI-ERC20|ECOMI|True|True
+OMN|OMN-Omega Chain|OMEGA|True|True
+ONE|ONE-Harmony|Harmony|True|True
+ONT|ONT-Ontology|Ontology|True|True
+OP|OP-Optimism|Optimism|True|True
+ORB|ORB-Polygon|Orbcity|True|True
+ORBS|ORBS-ERC20|Orbs Network|True|True
+ORDI|ORDI-BRC20|ordi|True|True
+OXT|OXT-ERC20|Orchid|True|True
+PCI|PCI-ERC20|Paycoin|True|True
+PEOPLE|PEOPLE-ERC20|ConstitutionDAO|True|True
+PEPE|PEPE-ERC20|Pepe|True|True
+PERP|PERP-ERC20|Perpetual Protocol|True|True
+PHA|PHA-Khala|Phala Network|True|True
+PIT|PIT-BSC|Pitbull|True|True
+POLS|POLS-ERC20|Polkastarter|True|True
+POLYDOGE|POLYDOGE-Polygon|PolyDoge|True|True
+POR|POR-Chiliz Legacy Chain|Portugal National Team Fan Token|True|True
+PRQ|PRQ-ERC20|PARSIQ|True|True
+PSTAKE|PSTAKE-ERC20|pSTAKE Finance|True|True
+PYTH|PYTH-Solana|Pyth Network|True|True
+QTUM|QTUM-Quantum|Qtum|True|True
+RACA|RACA-BSC|Radio Caca|True|True
+RADAR|RADAR-ERC20|DappRadar|True|True
+RAY|RAY-Solana|Raydium|True|True
+RDNT|RDNT-Arbitrum One|Radiant Capital|True|True
+REN|REN-ERC20|Ren|True|True
+REP|REP-ERC20|Reputation|True|True
+REVV|REVV-ERC20|REVV|True|True
+RIO|RIO-Stellar Lumens|RIO|False|False
+RNDR|RNDR-ERC20|Render|True|True
+RON|RON-Ronin|Ronin|True|True
+RPL|RPL-ERC20|Rocket Pool|True|True
+RSR|RSR-ERC20|Reserve Rights Token|True|True
+RSS3|RSS3-ERC20|RSS3|True|True
+RVN|RVN-Ravencoin|Ravencoin|True|True
+SAMO|SAMO-Solana|Samoyed Coin|True|True
+SAND|SAND-ERC20|SAND|True|True
+SATS|SATS-BRC20|SATS|True|True
+SC|SC-Siacoin|Siacoin|True|True
+SD|SD-ERC20|Stader|True|True
+SHIB|SHIB-ERC20|Shiba Inu|True|True
+SHIB|SHIBK-OKTC|Shiba Inu|True|False
+SIS|SIS-ERC20|Symbiosis Finance|True|True
+SKEB|SKEB-ERC20|Skeb Coin|True|True
+SKL|SKL-ERC20|SKALE|True|True
+SLP|SLP-ERC20|Smooth Love Potion|True|True
+SNT|SNT-ERC20|Status|True|True
+SNX|SNX-ERC20|Synthetix Network Token|True|True
+SOL|SOL-Solana|Solana|True|True
+SPELL|SPELL-ERC20|Spell Token|True|True
+SPURS|SPURS-Chiliz Chain|Tottenham Hotspur|True|True
+SRM|SRM-Solana|Serum|False|True
+SSV|SSV-ERC20|SSV Network|True|True
+SSWP|SSWP-SUI|Suiswap Token|True|True
+STARL|STARL-ERC20|StarLink|True|True
+STC|STC-BSC|Satoshi Island Coin|True|True
+STETH|STETH-ERC20|Lido Staked Ether|True|True
+STORJ|STORJ-ERC20|Storj|True|True
+STRK|STRK-Starknet|Starknet|True|False
+STX|STX-l-Stacks|Stacks|True|True
+SUI|SUI-SUI|Sui|True|True
+SUN|SUN-TRC20|SUN|True|True
+SUSHI|SUSHI-ERC20|SushiSwap|True|True
+SUSHI|SUSHIK-OKTC|SushiSwap|True|False
+SWEAT|SWEAT-ERC20|SWEAT|True|True
+SWEAT|SWEAT-NEAR|SWEAT|True|True
+SWFTC|SWFTC-ERC20|SwftCoin|True|True
+T|T-ERC20|Threshold Network Token|True|True
+TAKI|TAKI-Solana|Taki|True|True
+TAMA|TAMA-Polygon|Tamadoge|True|True
+THETA|THETA-Theta|THETA|True|True
+THG|THG-BSC|Thetan Arena|True|True
+TIA|TIA-Celestia|Celestia|True|True
+TON|TON-TON|Toncoin|True|True
+TRA|TRA-Chiliz Legacy Chain|Trabzonspor Fan Token|True|True
+TRB|TRB-ERC20|Tellor|True|True
+TRX|TRX-TRC20|TRON|True|True
+TRX|TRXK-OKTC|TRON|True|False
+TUP|TUP-ERC20|Tenup|True|True
+TURBO|TURBO-ERC20|Turbo|True|True
+TUSD|TUSD-ERC20|TrueUSD|True|True
+UMA|UMA-ERC20|UMA|True|True
+UNI|UNI-ERC20|Uniswap|True|True
+UNI|UNIK-OKTC|Uniswap|True|False
+USTC|USTC-Terra Classic|TerraClassicUSD|True|True
+UTK|UTK-ERC20|UTRUST|True|True
+VELA|VELA-Arbitrum One|Vela Token|True|True
+VELO|VELO-Stellar Lumens|Velo|False|False
+VELODROME|VELODROME-Optimism (V2)|Velodrome Finance|True|True
+VRA|VRA-ERC20|Verasity|True|True
+VSYS|VSYS-VSYSTEMS|V Systems|True|True
+WAXP|WAXP-Wax|WAX|True|True
+WAXP|WAXP-ERC20|WAX|True|True
+WBTC|WBTC-ERC20|Wrapped Bitcoin|True|True
+WBTC|WBTCK-OKTC|Wrapped Bitcoin|True|False
+WGRT|WGRT-WGRT|WaykiChain Governance Coin|False|False
+WIFI|WIFI-Polygon|WiFi Map|True|True
+WIN|WIN-TRC20|WINkLink|True|True
+WING|WINGK-OKTC|Wing|False|True
+WLD|WLD-ERC20|Worldcoin|True|True
+WLD|WLD-Optimism|Worldcoin|True|True
+WNCG|WNCG-ERC20|Wrapped Nine Chronicles Gold|True|True
+WOO|WOO-ERC20|WOO Network|True|True
+WSM|WSM-BSC|Wall Street Memes|True|True
+WXT|WXT-ERC20|Wirex Token|True|True
+XAUT|XAUT-ERC20|Tether Gold|True|True
+XCH|XCH-Chia|Chia Network|True|True
+XEC|XEC-XEC|eCash|True|True
+XEM|XEM-New Economy Movement|NEM|True|True
+XETA|XETA-XANA|XANA|True|True
+XLM|XLM-Stellar Lumens|Stellar|False|False
+XNO|XNO-Nano|Nano|False|False
+XPR|XPR-ERC20|Proton|True|True
+XTZ|XTZ-Tezos|Tezos|True|True
+YFI|YFI-ERC20|YEARN.FINANCE|True|True
+YFII|YFII-ERC20|YFII|True|True
+YGG|YGG-ERC20|Yield Guild Games|True|True
+ZBC|ZBC-Solana|Zebec Protocol|True|True
+ZEC|ZEC-Zcash|Zcash|False|True
+ZETA|ZETA-ZetaChain|ZetaChain|True|True
+ZIL|ZIL-Zilliqa|Zilliqa|True|True
+ZRX|ZRX-ERC20|0x|True|True

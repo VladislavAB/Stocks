@@ -6,6 +6,7 @@ import datetime
 import hmac
 import base64
 import pandas as pd
+from pprint import pprint
 
 
 class OKX:
@@ -70,7 +71,7 @@ class OKX:
         return t + "Z"
 
     @staticmethod
-    def signature(timestamp, method, request_path, body, secret_key):
+    def signature(timestamp, method, request_path, secret_key, body=None):
         if str(body) == '{}' or str(body) == 'None':
             body = ''
         message = str(timestamp) + str.upper(method) + request_path + str(body)
@@ -126,12 +127,49 @@ class OKX:
         return df
 
     def get_prices(self) -> pd.DataFrame:
+        df = ''
         url = 'https://www.okx.com/api/v5/market/tickers?instType=SPOT'
         api_response = requests.get(url)
         if api_response:
             load_from_json = json.loads(api_response.text)['data']
             df = pd.DataFrame(load_from_json)
         return df
+
+    def get_currencies(self) -> pd.DataFrame:
+        result = []
+        url = 'https://www.okx.com/api/v5/asset/currencies'
+        request = 'GET'
+        endpoint = '/api/v5/asset/currencies'
+        header = dict()
+        time = self.get_time()
+        header['CONTENT-TYPE'] = 'application/json'
+        header['OK-ACCESS-KEY'] = okex_key
+        header['OK-ACCESS-SIGN'] = self.signature(time, request, endpoint, okex_secret)
+        header['OK-ACCESS-TIMESTAMP'] = str(time)
+        header['OK-ACCESS-PASSPHRASE'] = okex_pass
+        response = requests.get(url, headers=header)
+        api_response = response.json()['data']
+        for coin_info in api_response:
+            currency = None
+            chain = None
+            name = None
+            deposit_enable = None
+            withdraw_enable = None
+            if 'canDep' in coin_info.keys():
+                deposit_enable = coin_info['canDep']
+            if 'ccy' in coin_info.keys():
+                currency = coin_info['ccy']
+            if 'chain' in coin_info.keys():
+                chain = coin_info['chain']
+            if 'canWd' in coin_info.keys():
+                withdraw_enable = coin_info['canWd']
+            if 'name' in coin_info.keys():
+                name = coin_info['name']
+            result.append({'currency': currency, 'chain': chain, 'name': name, 'deposit_enable': deposit_enable,
+                           'withdraw_enable': withdraw_enable})
+        df_result = pd.DataFrame(result)
+        return df_result
+
 
 load_dotenv()
 okex_key = os.getenv("key_OKX")
@@ -147,4 +185,5 @@ gen = df_final['gen_name']
 df_final = df_final.drop('gen_name', axis=1)
 df_final = df_final.drop('instType_x', axis=1)
 df_final.insert(0, 'gen_name', gen)
-df_final.to_csv('out/list-OKX.csv', encoding='utf-8', na_rep='None', sep='|', index=False)
+df_final.to_csv('out/OKX-spread.csv', encoding='utf-8', na_rep='None', sep='|', index=False)
+stock.get_currencies().to_csv('out/OKX-currency.csv', encoding='utf-8', na_rep='None', sep='|', index=False)

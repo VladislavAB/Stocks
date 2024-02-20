@@ -1,6 +1,7 @@
 import pandas as pd
 import requests
 import json
+from pprint import pprint
 
 
 class EXMO:
@@ -132,14 +133,96 @@ class EXMO:
         df = df[cols]
         return df
 
+    def get_currencies(self) -> pd.DataFrame:
+        result = []
+        url = 'https://api.exmo.me/v1.1/payments/providers/crypto/list'
+        api_response = requests.get(url)
+        if api_response:
+            response = json.loads(api_response.text)
+            for coin_info in response.values():
+                for coin in coin_info:
+                    currency_name = None
+                    name = None
+                    comment = None
+                    if 'currency_name' in coin.keys():
+                        currency_name = coin['currency_name']
+                    if 'name' in coin.keys():
+                        name = coin['name']
+                    if 'comment' in coin.keys():
+                        comment = coin['comment']
+                    if 'withdraw' in coin.values():
+                        withdraw = coin['enabled']
+                    else:
+                        if 'deposit' in coin.values():
+                            deposit = coin['enabled']
+                            result.append(
+                                {'currency_name': currency_name, 'name': name, 'withdraw': withdraw,
+                                 'deposit': deposit, 'comment': comment})
+        df_result = pd.DataFrame(result)
+        df_result["blockchain"] = df_result["comment"].apply(stock.display_blockchain)
+        return df_result
+
+    @staticmethod
+    def remove_in_brackets(string):
+        first_bracket_index, last_bracket_index = None, None
+        result = string
+        finished = False
+
+        while not finished:
+            for index, symbol in enumerate(result):
+                if symbol == '(':
+                    first_bracket_index = index
+                if symbol == ')':
+                    last_bracket_index = index
+                # print(f"{index}, {symbol} {first_bracket_index} {last_bracket_index}")
+                if first_bracket_index and last_bracket_index:
+                    result = result[:first_bracket_index - 1] + result[last_bracket_index + 1:]
+                    first_bracket_index, last_bracket_index = None, None
+                    break
+            if index == (len(result) - 1):
+                finished = True
+        return result
+
+    @staticmethod
+    def display_blockchain(string):
+        result = []
+        string = stock.remove_in_brackets(string)
+        string = string.replace('.', '')
+        string = string.replace(',', '')
+        words = string.split()
+        if 'network' in words:
+            for index, word in enumerate(words):
+                if word == 'network':
+                    network_index = index
+                    words = words[:network_index]
+                    words = words[::-1]
+                    break
+        else:
+            return None
+        for word in words:
+            if stock.have_capital(word):
+                result.append(word)
+            else:
+                break
+        result = ' '.join(result)
+        return result
+
+    @staticmethod
+    def have_capital(word):
+        for letter in word:
+            if letter.isupper():
+                return True
+
+
+# string = 'We support only Ethereum (ERC-20) network for PRQ deposits, please consider this when transferring funds'
 
 stock = EXMO()
-df_info = stock.get_exchange_info()
-df_prices = stock.get_prices()
-df_final = df_prices.merge(df_info, on='original_name', how='left')
-gen = df_final['gen_name']
-df_final = df_final.drop('gen_name', axis=1)
-df_final = df_final.drop('time', axis=1)
-df_final.insert(0, 'gen_name', gen)
-df_final.to_csv('out/list-EXMO.csv', encoding='utf-8', na_rep='None', sep='|', index=False)
-
+# df_info = stock.get_exchange_info()
+# df_prices = stock.get_prices()
+# df_final = df_prices.merge(df_info, on='original_name', how='left')
+# gen = df_final['gen_name']
+# df_final = df_final.drop('gen_name', axis=1)
+# df_final.insert(0, 'gen_name', gen)
+# df_final.to_csv('out/EXMO-spread.csv', encoding='utf-8', na_rep='None', sep='|', index=False)
+stock.get_currencies().to_csv('out/EXMO-currency.csv', encoding='utf-8', na_rep='None', sep='|', index=False)
+pprint(stock.get_currencies())

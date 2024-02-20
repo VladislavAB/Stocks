@@ -1,4 +1,5 @@
 import pandas as pd
+import openpyxl
 
 
 def min_ask(x):
@@ -37,11 +38,11 @@ def max_bid(x):
     return max_bid_price, max_bid_stock
 
 
-df_BIT = pd.read_csv('out/list-BIT.csv', delimiter='|')
-df_EXMO = pd.read_csv('out/list-EXMO.csv', delimiter='|')
-df_HTX = pd.read_csv('out/list-HTX.csv', delimiter='|')
-df_MEXC = pd.read_csv('out/list-MEXC.csv', delimiter='|')
-df_OKX = pd.read_csv('out/list-OKX.csv', delimiter='|')
+df_BIT = pd.read_csv('out/BIT-spread.csv', delimiter='|')
+df_EXMO = pd.read_csv('out/EXMO-spread.csv', delimiter='|')
+df_HTX = pd.read_csv('out/HTX-spread.csv', delimiter='|')
+df_MEXC = pd.read_csv('out/MEXC-spread.csv', delimiter='|')
+df_OKX = pd.read_csv('out/OKX-spread.csv', delimiter='|')
 df_final = pd.read_csv('out/catalog.csv', delimiter='|')
 df_final = df_final.drop('name_BIT', axis=1)
 df_final = df_final.drop('name_EXMO', axis=1)
@@ -69,4 +70,4 @@ df_final['max_bid'] = df_final.apply(max_bid, axis=1)
 df_final["arbitrage"] = df_final.apply(lambda x: x["max_bid"][0] - x["min_ask"][0], axis=1)
 df_final['percent'] = df_final.apply(lambda x: x["arbitrage"] * 100 / x["min_ask"][0], axis=1)
 df_final.to_csv('out/arbitrage.csv', encoding='utf-8', na_rep='None', sep='|', index=False)
-print(df_final)
+df_final.to_excel('out/arbitrage.xlsx', index=False, na_rep='None')

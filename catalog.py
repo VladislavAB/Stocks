@@ -18,11 +18,11 @@ def none_count(x):
 #         "name_OKX"].notna() | df_final["name_MEXC"].notna()]
 # ------------------
 
-df_BIT = pd.read_csv('out/list-BIT.csv', delimiter='|')
-df_EXMO = pd.read_csv('out/list-EXMO.csv', delimiter='|')
-df_HTX = pd.read_csv('out/list-HTX.csv', delimiter='|')
-df_MEXC = pd.read_csv('out/list-MEXC.csv', delimiter='|')
-df_OKX = pd.read_csv('out/list-OKX.csv', delimiter='|')
+df_BIT = pd.read_csv('out/BIT-spread.csv', delimiter='|')
+df_EXMO = pd.read_csv('out/EXMO-spread.csv', delimiter='|')
+df_HTX = pd.read_csv('out/HTX-spread.csv', delimiter='|')
+df_MEXC = pd.read_csv('out/MEXC-spread.csv', delimiter='|')
+df_OKX = pd.read_csv('out/OKX-spread.csv', delimiter='|')
 gen_names = {
     'gen_name': list(set(list(df_BIT["gen_name"]) + list(df_EXMO["gen_name"]) + list(df_HTX["gen_name"]) + list(
         df_MEXC["gen_name"]) + list(df_OKX["gen_name"])))}

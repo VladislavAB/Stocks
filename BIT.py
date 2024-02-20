@@ -2,6 +2,7 @@ import requests
 import json
 import pandas as pd
 
+
 class BIT:
     def __init__(self):
         self.base_url = 'https://api.bit.com/spot/v1/'
@@ -131,4 +132,4 @@ gen = df_final['gen_name']
 df_final = df_final.drop('gen_name', axis=1)
 df_final = df_final.drop('time', axis=1)
 df_final.insert(0, 'gen_name', gen)
-df_final.to_csv('out/list-BIT.csv', encoding='utf-8', na_rep='None', sep='|', index=False)
+df_final.to_csv('out/BIT-spread.csv', encoding='utf-8', na_rep='None', sep='|', index=False)

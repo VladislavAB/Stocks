@@ -1,6 +1,9 @@
 import requests
 import json
 import pandas as pd
+import hmac
+import hashlib
+from pprint import pprint
 
 
 class MEXC:
@@ -109,7 +112,8 @@ class MEXC:
             df = df[cols]
         return df
 
-    def get_prices(self) -> pd.DataFrame:
+    @staticmethod
+    def get_prices() -> pd.DataFrame:
         df = ''
         url = 'https://api.mexc.com/api/v3/ticker/bookTicker'
         api_response = requests.get(url)
@@ -117,6 +121,61 @@ class MEXC:
             load_from_json = json.loads(api_response.text)
             df = pd.DataFrame(load_from_json)
         return df
+
+    def get_servertime(self) -> str:
+        server_timestamp = None
+        url = self.base_url + 'time'
+        api_respond = requests.get(url)
+        if api_respond:
+            server_timestamp = json.loads(api_respond.text)
+        server_timestamp = str(server_timestamp['serverTime'])
+        return server_timestamp
+
+    def get_currencies(self) -> pd.DataFrame:
+        result = []
+        url = 'https://api.mexc.com/api/v3/capital/config/getall'
+        api_key = 'mx0vglgkhDEKmamyEL'
+        api_secret = '6c45b7b499704760867e699d70411c0c'
+        servertime = stock.get_servertime()
+        prehash = f'timestamp={servertime}'
+        signature = hmac.new(api_secret.encode('utf-8'), prehash.encode('utf-8'), hashlib.sha256).hexdigest()
+        headers = {
+            'x-mexc-apikey': api_key,
+            'Content-Type': 'application/x-www-form-urlencoded',
+        }
+        params = {'timestamp': str(servertime),
+                  'signature': signature
+                  }
+        response = requests.get(url, headers=headers, params=params).json()
+        for coin_info in response:
+            coin = None
+            name = None
+            if 'coin' in coin_info.keys():
+                coin = coin_info['coin']
+            if 'name' in coin_info.keys():
+                name = coin_info['name']
+            if 'networkList' in coin_info.keys():
+                for network_info in coin_info['networkList']:
+                    inner_coin = None
+                    depositenable = None
+                    inner_name = None
+                    network = None
+                    withdrawenable = None
+                    if 'coin' in network_info.keys():
+                        inner_coin = network_info['coin']
+                    if 'depositEnable' in network_info.keys():
+                        depositenable = network_info['depositEnable']
+                    if 'name' in network_info.keys():
+                        inner_name = network_info['name']
+                    if 'network' in network_info.keys():
+                        network = network_info['network']
+                    if 'withdrawEnable' in network_info.keys():
+                        withdrawenable = network_info['withdrawEnable']
+                    result.append({'coin': coin, 'name': name, 'inner_coin': inner_coin, 'inner_name': inner_name,
+                                   'depositenable': depositenable,
+                                   'withdrawenable': withdrawenable, 'network': network})
+        df_result = pd.DataFrame(result)
+        return df_result
 
 
 stock = MEXC()
@@ -127,5 +186,6 @@ df_final = df_prices.merge(df_info, on='original_name', how='left')
 gen = df_final['gen_name']
 df_final = df_final.drop('gen_name', axis=1)
 df_final.insert(0, 'gen_name', gen)
-df_final.to_csv('out/list-MEXC.csv', encoding='utf-8', na_rep='None', sep='|', index=False)
-
+df_final.to_csv('out/MEXC-spread.csv', encoding='utf-8', na_rep='None', sep='|', index=False)
+stock.get_currencies().to_csv('out/MEXC-currency.csv', encoding='utf-8', na_rep='None', sep='|', index=False)
+pprint(stock.get_currencies())
